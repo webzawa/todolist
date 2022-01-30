@@ -31,6 +31,7 @@ func setRoutes(app *fiber.App) {
 	app.Get("/todo/:id", models.GetTodoById)
 	app.Post("/todos", models.CreateTodo)
 	app.Put("/todos/:id", models.UpdateTodo)
+	app.Delete("/todos/:id", models.DeleteTodo)
 }
 
 func main() {
