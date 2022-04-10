@@ -8,7 +8,7 @@ const TodoForm = ({onFormSubmit}) => {
   const onFinish = () => {
     onFormSubmit({
       title: form.getFieldValue('title'),
-      complited: false
+      completed: false
     });
     console.log(form.getFieldValue('title'));
 

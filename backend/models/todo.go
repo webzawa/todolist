@@ -8,13 +8,13 @@ import (
 type Todo struct {
 	ID        uint   `gorm:"primarykey" json:"id"`
 	Title     string `json:"title"`
-	Complited bool   `json:"complited"`
+	Completed bool   `json:"completed"`
 }
 
 func GetTodos(c *fiber.Ctx) error {
 	db := database.DBConn
 	var todos []Todo
-	db.Find(&todos)
+	db.Debug().Find(&todos)
 	return c.JSON(&todos)
 }
 
@@ -22,7 +22,7 @@ func GetTodoById(c *fiber.Ctx) error {
 	id := c.Params("id")
 	db := database.DBConn
 	var todo Todo
-	err := db.Find(&todo, id).Error
+	err := db.Debug().Find(&todo, id).Error
 	if err != nil {
 		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Could not find todo", "data": err})
 	}
@@ -36,7 +36,7 @@ func CreateTodo(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Check your input", "data": err})
 	}
-	err = db.Create(&todo).Error
+	err = db.Debug().Create(&todo).Error
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{"status": "error", "message": "Could not create todo", "data": err})
 	}
@@ -46,12 +46,12 @@ func CreateTodo(c *fiber.Ctx) error {
 func UpdateTodo(c *fiber.Ctx) error {
 	type UpdatedTodo struct {
 		Title     string `json:"title"`
-		Complited bool   `json:"complited"`
+		Completed bool   `json:"completed"`
 	}
 	id := c.Params("id")
 	db := database.DBConn
 	var todo Todo
-	err := db.Find(&todo, id).Error
+	err := db.Debug().Find(&todo, id).Error
 	if err != nil {
 		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Could not find todo", "data": err})
 	}
@@ -62,8 +62,8 @@ func UpdateTodo(c *fiber.Ctx) error {
 	}
 
 	todo.Title = updatedTodo.Title
-	todo.Complited = updatedTodo.Complited
-	db.Save(&todo)
+	todo.Completed = updatedTodo.Completed
+	db.Debug().Save(&todo)
 	return c.JSON(&todo)
 }
 
@@ -71,10 +71,10 @@ func DeleteTodo(c *fiber.Ctx) error {
 	id := c.Params("id")
 	db := database.DBConn
 	var todo Todo
-	err := db.Find(&todo, id).Error
+	err := db.Debug().Find(&todo, id).Error
 	if err != nil {
 		return c.Status(404).JSON(fiber.Map{"status": "error", "message": "Could not find todo", "data": err})
 	}
-	db.Delete(&todo)
+	db.Debug().Delete(&todo)
 	return c.SendStatus(200)
 }

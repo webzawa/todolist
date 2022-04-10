@@ -16,7 +16,7 @@ export const createTodo = (todo) => {
     },
     body: JSON.stringify({
       title: todo.title,
-      complited: todo.complited
+      completed: todo.completed
     }),
   }).then((res) => res.json());
 }
@@ -30,7 +30,7 @@ export const updateTodo = (todo) => {
     body: JSON.stringify({
       id: todo.id,
       title: todo.title,
-      complited: todo.complited
+      completed: todo.completed
     }),
   }).then((res) => res.json());
 }
