@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Tabs, Layout, Row, Col, List } from 'antd'
-import Todoitem from './TodoItem'
+import TodoItem from './TodoItem'
 
 const TodoTab = ({todos, onTodoRemoval, onTodoToggle}) => {
   return (
@@ -9,7 +9,7 @@ const TodoTab = ({todos, onTodoRemoval, onTodoToggle}) => {
         locale={{ emptyText: "There is nothing to do ;(", }}
         dataSource={todos}
         renderItem={(todo) => {
-          <Todoitem
+          <TodoItem
             todo={todo}
             onTodoToggle={onTodoToggle}
             onTodoRemoval={onTodoRemoval}

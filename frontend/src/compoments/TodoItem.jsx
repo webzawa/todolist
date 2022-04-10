@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Tooltip, Tag, List, Button, Popconfirm, Switch } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 
-const Todo = (todo, onTodoRemovel, onTodoToggle) => {
+const TodoItem = (todo, onTodoRemovel, onTodoToggle) => {
   return (
     <List.Item
       actions={[
@@ -38,4 +38,4 @@ const Todo = (todo, onTodoRemovel, onTodoToggle) => {
 
 }
 
-export default Todo;
+export default TodoItem;
